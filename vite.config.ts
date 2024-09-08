@@ -13,6 +13,14 @@ export default defineConfig({
     server: {
         host: '0.0.0.0',
         port: 3000,
+        proxy: {
+            '/api': {
+                target: 'http://eventpulse.local', // Backend na Dockerze
+                changeOrigin: true,               // Ustawienie zmieniające nagłówek Origin na target
+                secure: false,                    // Jeśli nie masz certyfikatu SSL, ustaw na false
+                pathRewrite: { '^/api': '/api' }, // Przekierowanie ścieżki (opcjonalnie)
+            },
+        },
     },
     resolve: {
         alias: {

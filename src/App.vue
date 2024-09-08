@@ -1,14 +1,41 @@
 <script setup lang="ts">
 import HelloWorld from './components/HelloWorld.vue'
 import TheWelcome from './components/TheWelcome.vue'
-</script>
 
+</script>
+<script lang="ts">
+import { ref, onMounted } from 'vue';
+import axios from 'axios';
+
+export default {
+  setup() {
+    const data = ref(null);
+    const loading = ref(true);
+    const error = ref(null);
+
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('/api');  // Odwołanie do ścieżki lokalnej
+        data.value = response.data;
+      } catch (err) {
+        error.value = err.message;
+      } finally {
+        loading.value = false;
+      }
+    };
+
+    onMounted(fetchData);
+
+    return { data, loading, error };
+  }
+};
+</script>
 <template>
   <header>
     <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
 
     <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+      <HelloWorld msg="You did it! 1" />
     </div>
   </header>
 
