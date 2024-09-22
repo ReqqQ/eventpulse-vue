@@ -27,28 +27,20 @@
             </v-col>
             <v-col>
               <v-row class="d-flex justify-center">
-                <v-col cols="2" class="text-center">
-                  <NuxtLink :to="fbLink" target="_blank" no-rel>
+                <v-col cols="2" class="d-flex justify-center">
+                  <v-btn @click="stateFetch()" variant="plain" :ripple="false" class="d-inline">
                     <NuxtImg src="/fb-icon.svg" class="social-img"/>
-                  </NuxtLink>
-                  <NuxtLink :to="token" target="_blank" no-rel>
-                    <NuxtImg src="/fb-icon.svg" class="social-img"/>
-                  </NuxtLink>
+                  </v-btn>
                 </v-col>
-                <v-col cols="2" class="text-center">
-                  <NuxtImg src="/fb-icon.svg"/>
+                <v-col cols="2" class="d-flex justify-center">
+                  <v-btn @click="stateFetch()" variant="plain" :ripple="false" class="d-inline">
+                    <NuxtImg src="/ig.png" class="social-img"/>
+                  </v-btn>
                 </v-col>
-                <v-col cols="2" class="text-center">
-                  <NuxtImg src="/fb-icon.svg"/>
-                </v-col>
-                <v-col cols="2" class="text-center">
-                  <NuxtImg src="/fb-icon.svg"/>
-                </v-col>
-                <v-col cols="2" class="text-center">
-                  <NuxtImg src="/fb-icon.svg"/>
-                </v-col>
-                <v-col cols="2" class="text-center">
-                  <NuxtImg src="/fb-icon.svg"/>
+                <v-col cols="2" class="d-flex justify-center">
+                  <v-btn @click="stateFetch()" variant="plain" :ripple="false" class="d-inline">
+                    <NuxtImg src="/tiktok.png" class="social-img"/>
+                  </v-btn>
                 </v-col>
               </v-row>
             </v-col>
@@ -60,19 +52,56 @@
   </NuxtLayout>
 </template>
 <script setup lang="ts">
+const router = useRouter()
+const getStatus = () => {
+  FB.getLoginStatus(function(response) {
+    console.log(response)
+    if (response.status === 'connected') {
+     router.push('/')
+    } else if (response.status === 'not_authorized') {
+     fbLogin()
+    } else {
+     fbLogin()
+    }
+  });
+}
 
 const fbLogin = () => {
   // Uruchamianie logowania za pomocą Facebook SDK
   FB.login(function(response) {
     if (response.authResponse) {
-      console.log('Login successful! Fetching user data...')
-      FB.api('/me', { fields: 'name, email' }, function(response) {
-        console.log('Hello, ' + response.name)
+      FB.api('/me', function(response) {
+        console.log(response);
       })
+      stateFetch()
+
+      router.push('/')
     } else {
       console.log('User cancelled login or did not authorize.')
     }
   })
+}
+
+const stateFetch = async function fetchData() {
+  try {
+    const data = await fetch('https://eventpulse.local/api/session')
+    const jsonData = await data.json();
+    console.log(jsonData);
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
+
+  try {
+    const data = await fetch('https://eventpulse.local/api/session',{
+      method: 'POST',
+      body: {}
+    })
+    const jsonData = await data.json();
+    console.log('POST =>');
+    console.log(jsonData);
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
 }
 
 onMounted(() => {
