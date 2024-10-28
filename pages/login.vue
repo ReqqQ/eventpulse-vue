@@ -1,20 +1,21 @@
 <template>
-  <NuxtLayout class="layout-login" :name="layout">
+  <NuxtLayout :name="layout">
     <v-row>
-      <v-col>t</v-col>
+      <v-col>
+        T1
+      </v-col>
+      <v-col>
+        <NuxtImg src="/circle.png"></NuxtImg>
+      </v-col>
     </v-row>
   </NuxtLayout>
 </template>
-<script setup lang="ts">
 
-const layout = "login"
-const fingerStore = fingerPrintStore()
+<script setup lang="ts">
+const layout = "login";
+const fingerStore = fingerPrintStore();
+
 onMounted(() => {
-  console.log('wut ' + fingerStore.getFingerPrint)
-})
+  console.log('wut ' + fingerStore.getFingerPrint);
+});
 </script>
-<style>
-.layout-login {
-  background: #0B1739 !important;
-}
-</style>
