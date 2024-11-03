@@ -10,9 +10,20 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
-    "nuxt": "^3.13.1",
-    "vue": "latest",
-    "vue-router": "latest",
-    "vuetify-nuxt-module": "^0.18.2"
+    "@fingerprintjs/fingerprintjs": "*",
+    "@nuxt/image": "*",
+    "@pinia/nuxt": "^0.5.5",
+    "bowser": "*",
+    "crypto-js": "*",
+    "nuxt": "*",
+    "pinia": "^2.2.4",
+    "sharp": "^0.33.5",
+    "vue": "*",
+    "vue-router": "*",
+    "vuetify-nuxt-module": "^0.18.3"
+  },
+  "devDependencies": {
+    "vite-plugin-vuetify": "^2.0.4",
+    "vuetify": "^3.7.3"
   }
 }
