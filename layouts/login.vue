@@ -1,6 +1,7 @@
 <template>
   <v-layout class="rounded rounded-md">
-    <v-main class="flex-grow-1 layout-login">
+    <v-main class="flex-grow-1">
+      <div class="layout-login"></div> <!-- Tło będzie za resztą treści w `v-main` -->
       <v-container class="d-flex fill-height">
         <slot/>
       </v-container>
@@ -8,10 +9,16 @@
     <v-footer color="blue" app absolute>Footer Absolute</v-footer>
   </v-layout>
 </template>
+
 <style scoped>
 .layout-login {
   background-color: #03070c;
-  position: relative;
+  position: absolute; /* Ustawia pozycję absolutną */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1; /* Umieszcza tło za innymi elementami */
   overflow: hidden;
 }
 
@@ -24,7 +31,7 @@
   right: 0;
   bottom: 0;
   background-image: url('../public/stars.png'), url('../public/stars.png'), url('../public/stars.png'), url('../public/stars.png');
-  background-size: 200px, 250px, 180px, 220px; /* Każda warstwa w innym rozmiarze */
+  background-size: 200px, 250px, 180px, 220px;
   background-repeat: repeat;
   background-position:
       0 0,
@@ -53,5 +60,4 @@
   0%, 100% { opacity: 0.8; }
   50% { opacity: 0.3; }
 }
-
 </style>

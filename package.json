@@ -17,8 +17,13 @@
     "crypto-js": "*",
     "nuxt": "*",
     "pinia": "^2.2.4",
+    "sharp": "^0.33.5",
     "vue": "*",
     "vue-router": "*",
-    "vuetify-nuxt-module": "*"
+    "vuetify-nuxt-module": "^0.18.3"
+  },
+  "devDependencies": {
+    "vite-plugin-vuetify": "^2.0.4",
+    "vuetify": "^3.7.3"
   }
 }
